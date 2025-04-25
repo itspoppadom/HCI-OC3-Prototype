@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Receptionist Dashboard | Healthcare Portal</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="stylesheet" href="../css/dashboard.css" />
+    <script defer src="../js/script.js"></script>
+    <script defer src="../js/dashboard.js"></script>
+    <script defer src="../js/receptionist.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <img src="../img/logo.png" />
+        HealthCare
+      </div>
+      <nav>
+        <div class="user-nav">
+          <span id="user-info"></span>
+          <button class="logout-btn">Logout</button>
+        </div>
+        <button class="hamburger">☰</button>
+      </nav>
+    </header>
+
+    <main class="dashboard">
+      <div class="sidebar">
+        <ul>
+          <li class="active"><a href="#dashboard">Dashboard</a></li>
+          <li><a href="#appointments">Appointments</a></li>
+          <li><a href="#patients">Patients</a></li>
+          <li><a href="#doctors">Doctors</a></li>
+          <li><a href="#check-in">Check-In</a></li>
+        </ul>
+      </div>
+
+      <div class="content">
+        <!-- Dashboard Overview Section -->
+        <section id="dashboard" class="active">
+          <h1>Receptionist Dashboard</h1>
+          <div class="dashboard-stats">
+            <div class="stat-card">
+              <h3>Today's Appointments</h3>
+              <p class="stat-value">12</p>
+            </div>
+            <div class="stat-card">
+              <h3>Doctors Available</h3>
+              <p class="stat-value">8</p>
+            </div>
+            <div class="stat-card">
+              <h3>New Patients</h3>
+              <p class="stat-value">3</p>
+            </div>
+            <div class="stat-card">
+              <h3>Waiting Patients</h3>
+              <p class="stat-value">5</p>
+            </div>
+          </div>
+
+          <div class="upcoming-appointments">
+            <h2>Upcoming Appointments</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Time</th>
+                  <th>Patient</th>
+                  <th>Doctor</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>09:00 AM</td>
+                  <td>John Smith</td>
+                  <td>Dr. Martinez</td>
+                  <td>
+                    <span class="status-badge checked-in">Checked In</span>
+                  </td>
+                  <td>
+                    <button class="action-btn view-appointment-btn" data-id="1">
+                      View
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>09:30 AM</td>
+                  <td>Mary Johnson</td>
+                  <td>Dr. Williams</td>
+                  <td><span class="status-badge scheduled">Scheduled</span></td>
+                  <td>
+                    <button class="action-btn view-appointment-btn" data-id="2">
+                      View
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>10:00 AM</td>
+                  <td>Robert Brown</td>
+                  <td>Dr. Martinez</td>
+                  <td><span class="status-badge scheduled">Scheduled</span></td>
+                  <td>
+                    <button class="action-btn view-appointment-btn" data-id="3">
+                      View
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Appointments Section -->
+        <section id="appointments">
+          <h1>Appointments Management</h1>
+
+          <div class="action-bar">
+            <button id="new-appointment-btn" class="primary-btn">
+              Schedule New Appointment
+            </button>
+            <div class="filter-options">
+              <select id="doctor-filter">
+                <option value="">All Doctors</option>
+                <option value="Dr. Martinez">Dr. Martinez</option>
+                <option value="Dr. Williams">Dr. Williams</option>
+                <option value="Dr. Johnson">Dr. Johnson</option>
+                <option value="Dr. Davis">Dr. Davis</option>
+              </select>
+              <select id="date-filter">
+                <option value="">All Dates</option>
+                <option value="today">Today</option>
+                <option value="tomorrow">Tomorrow</option>
+                <option value="this-week">This Week</option>
+                <option value="next-week">Next Week</option>
+              </select>
+              <select id="status-filter">
+                <option value="">All Status</option>
+                <option value="scheduled">Scheduled</option>
+                <option value="checked-in">Checked In</option>
+                <option value="completed">Completed</option>
+                <option value="missed">Missed</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="appointment-calendar">
+            <div class="calendar-header">
+              <button class="calendar-nav prev-week">&lt;</button>
+              <h2 id="current-week">November 6-10, 2023</h2>
+              <button class="calendar-nav next-week">&gt;</button>
+            </div>
+
+            <div class="calendar-grid">
+              <div class="calendar-day">
+                <div class="calendar-day-header">Monday</div>
+                <div class="appointment-card booked" data-id="3">
+                  <p class="appointment-time">10:00 AM</p>
+                  <p class="appointment-patient">Robert Brown</p>
+                  <p class="appointment-doctor">Dr. Martinez</p>
+                </div>
+                <!-- Add more appointment cards as needed -->
+              </div>
+
+              <div class="calendar-day">
+                <div class="calendar-day-header">Tuesday</div>
+                <div class="appointment-card booked" data-id="1">
+                  <p class="appointment-time">9:00 AM</p>
+                  <p class="appointment-patient">John Smith</p>
+                  <p class="appointment-doctor">Dr. Martinez</p>
+                </div>
+                <div class="appointment-card booked" data-id="2">
+                  <p class="appointment-time">9:30 AM</p>
+                  <p class="appointment-patient">Mary Johnson</p>
+                  <p class="appointment-doctor">Dr. Williams</p>
+                </div>
+                <!-- Add more appointment cards as needed -->
+              </div>
+
+              <div class="calendar-day">
+                <div class="calendar-day-header">Wednesday</div>
+                <!-- Empty day, can add placeholders or leave blank -->
+              </div>
+
+              <div class="calendar-day">
+                <div class="calendar-day-header">Thursday</div>
+                <div class="appointment-card booked" data-id="4">
+                  <p class="appointment-time">2:00 PM</p>
+                  <p class="appointment-patient">Sarah Davis</p>
+                  <p class="appointment-doctor">Dr. Johnson</p>
+                </div>
+                <!-- Add more appointment cards as needed -->
+              </div>
+
+              <div class="calendar-day">
+                <div class="calendar-day-header">Friday</div>
+                <div class="appointment-card booked" data-id="5">
+                  <p class="appointment-time">3:00 PM</p>
+                  <p class="appointment-patient">Michael Wilson</p>
+                  <p class="appointment-doctor">Dr. Davis</p>
+                </div>
+                <!-- Add more appointment cards as needed -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Patients Section -->
+        <section id="patients">
+          <h1>Patient Management</h1>
+
+          <div class="action-bar">
+            <button id="add-patient-btn" class="primary-btn">
+              Add New Patient
+            </button>
+            <input
+              type="text"
+              id="patient-search"
+              placeholder="Search patients..."
+              class="search-input"
+            />
+          </div>
+
+          <div class="patients-table-container">
+            <table id="patients-table">
+              <thead>
+                <tr>
+                  <th>Patient ID</th>
+                  <th>Name</th>
+                  <th>Date of Birth</th>
+                  <th>Last Visit</th>
+                  <th>Phone</th>
+                  <th>Primary Doctor</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>P-10001</td>
+                  <td>John Smith</td>
+                  <td>05/12/1980</td>
+                  <td>11/06/2023</td>
+                  <td>555-123-4567</td>
+                  <td>Dr. Martinez</td>
+                  <td>
+                    <button
+                      class="action-btn view-patient-btn"
+                      data-id="P-10001"
+                    >
+                      View
+                    </button>
+                    <button
+                      class="action-btn schedule-for-patient-btn"
+                      data-id="P-10001"
+                    >
+                      Schedule
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>P-10002</td>
+                  <td>Mary Johnson</td>
+                  <td>08/23/1975</td>
+                  <td>11/06/2023</td>
+                  <td>555-987-6543</td>
+                  <td>Dr. Williams</td>
+                  <td>
+                    <button
+                      class="action-btn view-patient-btn"
+                      data-id="P-10002"
+                    >
+                      View
+                    </button>
+                    <button
+                      class="action-btn schedule-for-patient-btn"
+                      data-id="P-10002"
+                    >
+                      Schedule
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>P-10003</td>
+                  <td>Robert Brown</td>
+                  <td>11/30/1992</td>
+                  <td>11/07/2023</td>
+                  <td>555-234-5678</td>
+                  <td>Dr. Martinez</td>
+                  <td>
+                    <button
+                      class="action-btn view-patient-btn"
+                      data-id="P-10003"
+                    >
+                      View
+                    </button>
+                    <button
+                      class="action-btn schedule-for-patient-btn"
+                      data-id="P-10003"
+                    >
+                      Schedule
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>P-10004</td>
+                  <td>Sarah Davis</td>
+                  <td>03/15/1988</td>
+                  <td>10/25/2023</td>
+                  <td>555-345-6789</td>
+                  <td>Dr. Johnson</td>
+                  <td>
+                    <button
+                      class="action-btn view-patient-btn"
+                      data-id="P-10004"
+                    >
+                      View
+                    </button>
+                    <button
+                      class="action-btn schedule-for-patient-btn"
+                      data-id="P-10004"
+                    >
+                      Schedule
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>P-10005</td>
+                  <td>Michael Wilson</td>
+                  <td>07/09/1965</td>
+                  <td>10/18/2023</td>
+                  <td>555-456-7890</td>
+                  <td>Dr. Davis</td>
+                  <td>
+                    <button
+                      class="action-btn view-patient-btn"
+                      data-id="P-10005"
+                    >
+                      View
+                    </button>
+                    <button
+                      class="action-btn schedule-for-patient-btn"
+                      data-id="P-10005"
+                    >
+                      Schedule
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Doctors Section -->
+        <section id="doctors">
+          <h1>Doctor Schedule Management</h1>
+
+          <div class="action-bar">
+            <button id="view-all-schedules-btn" class="primary-btn">
+              View All Schedules
+            </button>
+            <select id="doctor-schedule-filter">
+              <option value="">Select Doctor</option>
+              <option value="Dr. Martinez">Dr. Martinez</option>
+              <option value="Dr. Williams">Dr. Williams</option>
+              <option value="Dr. Johnson">Dr. Johnson</option>
+              <option value="Dr. Davis">Dr. Davis</option>
+            </select>
+          </div>
+
+          <div class="doctors-grid">
+            <div class="doctor-card">
+              <img src="../img/doctor1.png" alt="Dr. Martinez" />
+              <h3>Dr. Martinez</h3>
+              <p class="doctor-specialty">General Medicine</p>
+              <p class="doctor-status available">Available</p>
+              <div class="doctor-schedule">
+                <h4>Today's Schedule:</h4>
+                <ul>
+                  <li>9:00 AM - John Smith</li>
+                  <li>10:00 AM - Robert Brown</li>
+                  <li>2:00 PM - Open</li>
+                  <li>3:00 PM - Open</li>
+                </ul>
+              </div>
+              <button
+                class="action-btn view-schedule-btn"
+                data-doctor="Dr. Martinez"
+              >
+                View Full Schedule
+              </button>
+            </div>
+
+            <div class="doctor-card">
+              <img src="../img/doctor2.png" alt="Dr. Williams" />
+              <h3>Dr. Williams</h3>
+              <p class="doctor-specialty">Pediatrics</p>
+              <p class="doctor-status available">Available</p>
+              <div class="doctor-schedule">
+                <h4>Today's Schedule:</h4>
+                <ul>
+                  <li>9:30 AM - Mary Johnson</li>
+                  <li>10:30 AM - Open</li>
+                  <li>1:30 PM - Open</li>
+                  <li>3:30 PM - Open</li>
+                </ul>
+              </div>
+              <button
+                class="action-btn view-schedule-btn"
+                data-doctor="Dr. Williams"
+              >
+                View Full Schedule
+              </button>
+            </div>
+
+            <div class="doctor-card">
+              <img src="../img/doctor3.png" alt="Dr. Johnson" />
+              <h3>Dr. Johnson</h3>
+              <p class="doctor-specialty">Cardiology</p>
+              <p class="doctor-status unavailable">Unavailable</p>
+              <div class="doctor-schedule">
+                <h4>Today's Schedule:</h4>
+                <ul>
+                  <li>Out of Office - Conference</li>
+                  <li>Returns Tomorrow</li>
+                </ul>
+              </div>
+              <button
+                class="action-btn view-schedule-btn"
+                data-doctor="Dr. Johnson"
+              >
+                View Full Schedule
+              </button>
+            </div>
+
+            <div class="doctor-card">
+              <img src="../img/doctor4.png" alt="Dr. Davis" />
+              <h3>Dr. Davis</h3>
+              <p class="doctor-specialty">Orthopedics</p>
+              <p class="doctor-status available">Available</p>
+              <div class="doctor-schedule">
+                <h4>Today's Schedule:</h4>
+                <ul>
+                  <li>9:00 AM - Open</li>
+                  <li>11:00 AM - Open</li>
+                  <li>1:00 PM - Open</li>
+                  <li>3:00 PM - Open</li>
+                </ul>
+              </div>
+              <button
+                class="action-btn view-schedule-btn"
+                data-doctor="Dr. Davis"
+              >
+                View Full Schedule
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Check-In Section -->
+        <section id="check-in">
+          <h1>Patient Check-In</h1>
+
+          <div class="check-in-container">
+            <div class="check-in-form">
+              <h2>Check-In Form</h2>
+              <form id="patient-check-in-form">
+                <div class="form-group">
+                  <label for="check-in-patient-id">Patient ID or Name:</label>
+                  <input
+                    type="text"
+                    id="check-in-patient-id"
+                    placeholder="Enter Patient ID or Name"
+                    required
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="check-in-appointment-time"
+                    >Appointment Time:</label
+                  >
+                  <input type="time" id="check-in-appointment-time" />
+                </div>
+
+                <div class="form-group">
+                  <label for="check-in-doctor">Doctor:</label>
+                  <select id="check-in-doctor">
+                    <option value="">Select Doctor</option>
+                    <option value="Dr. Martinez">Dr. Martinez</option>
+                    <option value="Dr. Williams">Dr. Williams</option>
+                    <option value="Dr. Johnson">Dr. Johnson</option>
+                    <option value="Dr. Davis">Dr. Davis</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="check-in-reason">Reason for Visit:</label>
+                  <textarea id="check-in-reason" rows="3"></textarea>
+                </div>
+
+                <div class="form-group">
+                  <label for="check-in-notes">Notes:</label>
+                  <textarea id="check-in-notes" rows="2"></textarea>
+                </div>
+
+                <button type="submit" class="primary-btn">
+                  Check In Patient
+                </button>
+              </form>
+            </div>
+
+            <div class="checked-in-patients">
+              <h2>Currently Checked-In Patients</h2>
+
+              <div class="patient-info">
+                <h3>John Smith</h3>
+                <p><strong>Appointment:</strong> 9:00 AM with Dr. Martinez</p>
+                <p><strong>Checked In:</strong> 8:45 AM</p>
+                <p><strong>Reason:</strong> Annual checkup</p>
+                <button
+                  class="action-btn notify-doctor-btn"
+                  data-patient="John Smith"
+                  data-doctor="Dr. Martinez"
+                >
+                  Notify Doctor
+                </button>
+              </div>
+
+              <div class="patient-info">
+                <h3>Mary Johnson</h3>
+                <p><strong>Appointment:</strong> 9:30 AM with Dr. Williams</p>
+                <p><strong>Checked In:</strong> 9:15 AM</p>
+                <p><strong>Reason:</strong> Follow-up appointment</p>
+                <button
+                  class="action-btn notify-doctor-btn"
+                  data-patient="Mary Johnson"
+                  data-doctor="Dr. Williams"
+                >
+                  Notify Doctor
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Modals -->
+    <!-- Add/Edit Patient Modal -->
+    <div class="modal" id="patient-modal">
+      <div class="modal-content">
+        <span class="close patient-modal-close">&times;</span>
+        <h2 id="patient-modal-title">Add New Patient</h2>
+        <form id="patient-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="patient-first-name">First Name</label>
+              <input type="text" id="patient-first-name" required />
+            </div>
+            <div class="form-group">
+              <label for="patient-last-name">Last Name</label>
+              <input type="text" id="patient-last-name" required />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="patient-dob">Date of Birth</label>
+              <input type="date" id="patient-dob" required />
+            </div>
+            <div class="form-group">
+              <label for="patient-gender">Gender</label>
+              <select id="patient-gender" required>
+                <option value="">Select</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="patient-phone">Phone Number</label>
+              <input type="tel" id="patient-phone" required />
+            </div>
+            <div class="form-group">
+              <label for="patient-email">Email</label>
+              <input type="email" id="patient-email" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="patient-address">Address</label>
+            <input type="text" id="patient-address" required />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="patient-doctor">Primary Doctor</label>
+              <select id="patient-doctor" required>
+                <option value="">Select Doctor</option>
+                <option value="Dr. Martinez">Dr. Martinez</option>
+                <option value="Dr. Williams">Dr. Williams</option>
+                <option value="Dr. Johnson">Dr. Johnson</option>
+                <option value="Dr. Davis">Dr. Davis</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="patient-insurance">Insurance Provider</label>
+              <input type="text" id="patient-insurance" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="patient-medical-conditions">Medical Conditions</label>
+            <textarea id="patient-medical-conditions" rows="3"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="patient-allergies">Allergies</label>
+            <textarea id="patient-allergies" rows="2"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="patient-medications">Current Medications</label>
+            <textarea id="patient-medications" rows="2"></textarea>
+          </div>
+
+          <button type="submit" class="primary-btn">Save Patient</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- View Patient Modal -->
+    <div class="modal" id="view-patient-modal">
+      <div class="modal-content large-modal">
+        <span class="close view-patient-modal-close">&times;</span>
+        <h2>Patient Information</h2>
+
+        <div class="patient-view-container">
+          <div class="patient-view-header">
+            <div class="patient-basic-info">
+              <h3>Basic Information</h3>
+              <p>
+                <strong>Patient ID:</strong>
+                <span id="view-patient-id">P-10001</span>
+              </p>
+              <p>
+                <strong>Name:</strong>
+                <span id="view-patient-name">John Smith</span>
+              </p>
+              <p>
+                <strong>Date of Birth:</strong>
+                <span id="view-patient-dob">05/12/1980</span>
+              </p>
+              <p>
+                <strong>Gender:</strong>
+                <span id="view-patient-gender">Male</span>
+              </p>
+            </div>
+
+            <div class="patient-contact-info">
+              <h3>Contact Information</h3>
+              <p>
+                <strong>Phone:</strong>
+                <span id="view-patient-phone">555-123-4567</span>
+              </p>
+              <p>
+                <strong>Email:</strong>
+                <span id="view-patient-email">john.smith@email.com</span>
+              </p>
+              <p>
+                <strong>Address:</strong>
+                <span id="view-patient-address">123 Main St, Anytown</span>
+              </p>
+            </div>
+
+            <div class="patient-medical-info">
+              <h3>Medical Information</h3>
+              <p>
+                <strong>Primary Doctor:</strong>
+                <span id="view-patient-doctor">Dr. Martinez</span>
+              </p>
+              <p>
+                <strong>Insurance:</strong>
+                <span id="view-patient-insurance">HealthPlus</span>
+              </p>
+              <p>
+                <strong>Last Visit:</strong>
+                <span id="view-patient-last-visit">11/06/2023</span>
+              </p>
+            </div>
+          </div>
+
+          <div class="patient-view-tabs">
+            <button class="tab-btn active" data-tab="appointments">
+              Appointments
+            </button>
+            <button class="tab-btn" data-tab="medical-history">
+              Medical History
+            </button>
+            <button class="tab-btn" data-tab="billing">Billing</button>
+          </div>
+
+          <div class="tab-content active" id="appointments-tab">
+            <h3>Appointment History</h3>
+            <table class="patient-appointments-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th>Doctor</th>
+                  <th>Reason</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>11/06/2023</td>
+                  <td>9:00 AM</td>
+                  <td>Dr. Martinez</td>
+                  <td>Annual checkup</td>
+                  <td><span class="status-badge completed">Completed</span></td>
+                </tr>
+                <tr>
+                  <td>10/02/2023</td>
+                  <td>10:30 AM</td>
+                  <td>Dr. Martinez</td>
+                  <td>Flu symptoms</td>
+                  <td><span class="status-badge completed">Completed</span></td>
+                </tr>
+                <tr>
+                  <td>08/15/2023</td>
+                  <td>1:00 PM</td>
+                  <td>Dr. Johnson</td>
+                  <td>Referral consult</td>
+                  <td><span class="status-badge completed">Completed</span></td>
+                </tr>
+              </tbody>
+            </table>
+            <button
+              class="action-btn schedule-for-patient-btn-modal"
+              data-id="P-10001"
+            >
+              Schedule New Appointment
+            </button>
+          </div>
+
+          <div class="tab-content" id="medical-history-tab">
+            <h3>Medical History</h3>
+
+            <div class="medical-history-section">
+              <h4>Medical Conditions</h4>
+              <p id="view-patient-conditions">Hypertension, Type 2 Diabetes</p>
+            </div>
+
+            <div class="medical-history-section">
+              <h4>Allergies</h4>
+              <p id="view-patient-allergies">Penicillin, Peanuts</p>
+            </div>
+
+            <div class="medical-history-section">
+              <h4>Current Medications</h4>
+              <p id="view-patient-medications">
+                Lisinopril 10mg daily, Metformin 500mg twice daily
+              </p>
+            </div>
+
+            <div class="medical-history-section">
+              <h4>Past Procedures</h4>
+              <ul>
+                <li>Appendectomy (2010)</li>
+                <li>Knee arthroscopy (2015)</li>
+              </ul>
+            </div>
+
+            <div class="medical-history-section">
+              <h4>Family History</h4>
+              <p>Father: Heart disease</p>
+              <p>Mother: Type 2 diabetes</p>
+            </div>
+          </div>
+
+          <div class="tab-content" id="billing-tab">
+            <h3>Billing Information</h3>
+
+            <table class="patient-bills-table">
+              <thead>
+                <tr>
+                  <th>Invoice #</th>
+                  <th>Date</th>
+                  <th>Service</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>INV-2023-1042</td>
+                  <td>11/06/2023</td>
+                  <td>Annual checkup</td>
+                  <td>$150.00</td>
+                  <td><span class="status-badge paid">Paid</span></td>
+                </tr>
+                <tr>
+                  <td>INV-2023-0897</td>
+                  <td>10/02/2023</td>
+                  <td>Office visit - Flu symptoms</td>
+                  <td>$125.00</td>
+                  <td><span class="status-badge paid">Paid</span></td>
+                </tr>
+                <tr>
+                  <td>INV-2023-0756</td>
+                  <td>08/15/2023</td>
+                  <td>Specialist consultation</td>
+                  <td>$200.00</td>
+                  <td><span class="status-badge paid">Paid</span></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="billing-summary">
+              <p><strong>Insurance:</strong> HealthPlus</p>
+              <p><strong>Policy #:</strong> HP-1234567</p>
+              <p><strong>Copay:</strong> $25</p>
+              <p><strong>Outstanding Balance:</strong> $0.00</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Schedule Appointment Modal -->
+    <div class="modal" id="appointment-modal">
+      <div class="modal-content">
+        <span class="close appointment-modal-close">&times;</span>
+        <h2 id="appointment-modal-title">Schedule New Appointment</h2>
+        <form id="appointment-form">
+          <div class="form-group">
+            <label for="appointment-patient">Patient</label>
+            <input type="text" id="appointment-patient" required />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="appointment-date">Date</label>
+              <input type="date" id="appointment-date" required />
+            </div>
+            <div class="form-group">
+              <label for="appointment-time">Time</label>
+              <input type="time" id="appointment-time" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="appointment-doctor">Doctor</label>
+            <select id="appointment-doctor" required>
+              <option value="">Select Doctor</option>
+              <option value="Dr. Martinez">Dr. Martinez</option>
+              <option value="Dr. Williams">Dr. Williams</option>
+              <option value="Dr. Johnson">Dr. Johnson</option>
+              <option value="Dr. Davis">Dr. Davis</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="appointment-reason">Reason for Visit</label>
+            <textarea id="appointment-reason" rows="3" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="appointment-notes">Notes</label>
+            <textarea id="appointment-notes" rows="2"></textarea>
+          </div>
+
+          <button type="submit" class="primary-btn">
+            Schedule Appointment
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- View Doctor Schedule Modal -->
+    <div class="modal" id="doctor-schedule-modal">
+      <div class="modal-content large-modal">
+        <span class="close doctor-schedule-modal-close">&times;</span>
+        <h2 id="doctor-schedule-name">Dr. Martinez's Schedule</h2>
+
+        <div class="schedule-navigation">
+          <button class="calendar-nav prev-month">&lt;</button>
+          <h3 id="current-month">November 2023</h3>
+          <button class="calendar-nav next-month">&gt;</button>
+        </div>
+
+        <table class="doctor-schedule-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Patient</th>
+              <th>Reason</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Nov 7, 2023</td>
+              <td>9:00 AM</td>
+              <td>John Smith</td>
+              <td>Annual checkup</td>
+              <td><span class="status-badge scheduled">Scheduled</span></td>
+            </tr>
+            <tr>
+              <td>Nov 7, 2023</td>
+              <td>10:00 AM</td>
+              <td>Robert Brown</td>
+              <td>Follow-up</td>
+              <td><span class="status-badge scheduled">Scheduled</span></td>
+            </tr>
+            <tr>
+              <td>Nov 7, 2023</td>
+              <td>2:00 PM</td>
+              <td>Available</td>
+              <td>-</td>
+              <td><span class="status-badge available">Available</span></td>
+            </tr>
+            <tr>
+              <td>Nov 7, 2023</td>
+              <td>3:00 PM</td>
+              <td>Available</td>
+              <td>-</td>
+              <td><span class="status-badge available">Available</span></td>
+            </tr>
+            <tr>
+              <td>Nov 8, 2023</td>
+              <td>9:00 AM</td>
+              <td>Available</td>
+              <td>-</td>
+              <td><span class="status-badge available">Available</span></td>
+            </tr>
+            <tr>
+              <td>Nov 8, 2023</td>
+              <td>10:00 AM</td>
+              <td>Available</td>
+              <td>-</td>
+              <td><span class="status-badge available">Available</span></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <button id="add-schedule-appointment-btn" class="primary-btn">
+          Add Appointment
+        </button>
+      </div>
+    </div>
+
+    <!-- View Appointment Modal -->
+    <div class="modal" id="view-appointment-modal">
+      <div class="modal-content">
+        <span class="close view-appointment-modal-close">&times;</span>
+        <h2>Appointment Details</h2>
+        <div id="appointment-details">
+          <p>
+            <strong>Patient:</strong>
+            <span id="view-appointment-patient">John Smith</span>
+          </p>
+          <p>
+            <strong>Date:</strong>
+            <span id="view-appointment-date">November 7, 2023</span>
+          </p>
+          <p>
+            <strong>Time:</strong>
+            <span id="view-appointment-time">9:00 AM</span>
+          </p>
+          <p>
+            <strong>Doctor:</strong>
+            <span id="view-appointment-doctor">Dr. Martinez</span>
+          </p>
+          <p>
+            <strong>Reason:</strong>
+            <span id="view-appointment-reason">Annual checkup</span>
+          </p>
+          <p>
+            <strong>Status:</strong>
+            <span id="view-appointment-status">Scheduled</span>
+          </p>
+          <p>
+            <strong>Notes:</strong>
+            <span id="view-appointment-notes"
+              >Patient's first annual checkup since registering with the
+              clinic.</span
+            >
+          </p>
+        </div>
+        <div class="appointment-actions">
+          <button id="edit-appointment-btn" class="action-btn">Edit</button>
+          <button id="cancel-appointment-btn" class="danger-btn">
+            Cancel Appointment
+          </button>
+          <button id="check-in-appointment-btn" class="primary-btn">
+            Check In
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>Email:30087241@nescol.ac.uk | Phone: 01224 612330</p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Healthcare Provider Dashboard | Healthcare Portal</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="stylesheet" href="../css/dashboard.css" />
+    <link rel="stylesheet" href="../css/healthcare-provider.css" />
+    <script defer src="../js/script.js"></script>
+    <script defer src="../js/dashboard.js"></script>
+    <script defer src="../js/healthcare-provider.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <img src="../img/logo.png" />
+        HealthCare
+      </div>
+      <nav>
+        <div class="user-nav">
+          <span id="user-info"></span>
+          <button class="logout-btn">Logout</button>
+        </div>
+        <button class="hamburger">☰</button>
+      </nav>
+    </header>
+
+    <main class="dashboard">
+      <div class="sidebar">
+        <ul>
+          <li class="active"><a href="#dashboard">Dashboard</a></li>
+          <li><a href="#patients">My Patients</a></li>
+          <li><a href="#appointments">Appointments</a></li>
+          <li><a href="#prescriptions">Prescriptions</a></li>
+          <li><a href="#medications">Medication Database</a></li>
+        </ul>
+      </div>
+
+      <div class="content">
+        <!-- Dashboard Overview Section -->
+        <section id="dashboard" class="active">
+          <h1>Healthcare Provider Dashboard</h1>
+          <div class="dashboard-stats">
+            <div class="stat-card">
+              <h3>Today's Patients</h3>
+              <p class="stat-value">8</p>
+            </div>
+            <div class="stat-card">
+              <h3>Waiting Patients</h3>
+              <p class="stat-value">3</p>
+            </div>
+            <div class="stat-card">
+              <h3>Prescriptions (Today)</h3>
+              <p class="stat-value">5</p>
+            </div>
+            <div class="stat-card">
+              <h3>Lab Results Pending</h3>
+              <p class="stat-value">2</p>
+            </div>
+          </div>
+
+          <div class="patient-queue">
+            <h2>Patient Queue</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Patient</th>
+                  <th>Time</th>
+                  <th>Reason</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Patient queue will be populated by JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Patients Section -->
+        <section id="patients">
+          <h1>My Patients</h1>
+          <div class="search-container">
+            <input
+              type="text"
+              id="patient-search"
+              placeholder="Search patients by name or ID..."
+              class="search-input"
+            />
+          </div>
+
+          <div class="patients-list">
+            <!-- Patient search results will be displayed here -->
+            <p>Enter a search term to find patients</p>
+          </div>
+        </section>
+
+        <!-- Appointments Section -->
+        <section id="appointments">
+          <h1>Appointments</h1>
+          <div class="appointment-calendar">
+            <div class="calendar-header">
+              <button class="calendar-nav prev-week">&lt;</button>
+              <h2>November 6-10, 2023</h2>
+              <button class="calendar-nav next-week">&gt;</button>
+            </div>
+
+            <div class="calendar-grid">
+              <div class="calendar-day">
+                <div class="calendar-day-header">Monday</div>
+                <div class="appointment-card">
+                  <p class="appointment-time">9:00 AM</p>
+                  <p class="appointment-patient">John Smith</p>
+                  <p class="appointment-reason">Annual checkup</p>
+                </div>
+                <div class="appointment-card">
+                  <p class="appointment-time">10:00 AM</p>
+                  <p class="appointment-patient">Robert Brown</p>
+                  <p class="appointment-reason">Skin rash</p>
+                </div>
+              </div>
+
+              <div class="calendar-day">
+                <div class="calendar-day-header">Tuesday</div>
+                <div class="appointment-card">
+                  <p class="appointment-time">9:30 AM</p>
+                  <p class="appointment-patient">Mary Johnson</p>
+                  <p class="appointment-reason">Follow-up</p>
+                </div>
+              </div>
+
+              <div class="calendar-day">
+                <div class="calendar-day-header">Wednesday</div>
+                <!-- No appointments today -->
+              </div>
+
+              <div class="calendar-day">
+                <div class="calendar-day-header">Thursday</div>
+                <div class="appointment-card">
+                  <p class="appointment-time">2:00 PM</p>
+                  <p class="appointment-patient">Sarah Davis</p>
+                  <p class="appointment-reason">Migraine consultation</p>
+                </div>
+              </div>
+
+              <div class="calendar-day">
+                <div class="calendar-day-header">Friday</div>
+                <div class="appointment-card">
+                  <p class="appointment-time">3:00 PM</p>
+                  <p class="appointment-patient">Michael Wilson</p>
+                  <p class="appointment-reason">Arthritis follow-up</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="weekly-schedule">
+            <h2>My Schedule This Week</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Day</th>
+                  <th>Hours</th>
+                  <th>Appointments</th>
+                  <th>Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Monday</td>
+                  <td>8:00 AM - 5:00 PM</td>
+                  <td>6 scheduled</td>
+                  <td>Team meeting at 12:30 PM</td>
+                </tr>
+                <tr>
+                  <td>Tuesday</td>
+                  <td>8:00 AM - 5:00 PM</td>
+                  <td>4 scheduled</td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td>Wednesday</td>
+                  <td>8:00 AM - 12:00 PM</td>
+                  <td>2 scheduled</td>
+                  <td>Half day - continuing education</td>
+                </tr>
+                <tr>
+                  <td>Thursday</td>
+                  <td>8:00 AM - 5:00 PM</td>
+                  <td>5 scheduled</td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td>Friday</td>
+                  <td>8:00 AM - 4:00 PM</td>
+                  <td>3 scheduled</td>
+                  <td>Early close</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Prescriptions Section -->
+        <section id="prescriptions">
+          <h1>Prescriptions</h1>
+          <div class="search-container">
+            <input
+              type="text"
+              id="prescription-search"
+              placeholder="Search prescriptions by patient, medication, or ID..."
+              class="search-input"
+            />
+          </div>
+
+          <div class="prescriptions-list">
+            <!-- Prescription search results will be displayed here -->
+            <p>Enter a search term to find prescriptions</p>
+          </div>
+
+          <div class="prescription-stats">
+            <div class="stat-card">
+              <h3>Active Prescriptions</h3>
+              <p class="stat-value">42</p>
+            </div>
+            <div class="stat-card">
+              <h3>Prescriptions This Month</h3>
+              <p class="stat-value">15</p>
+            </div>
+            <div class="stat-card">
+              <h3>Renewals Needed</h3>
+              <p class="stat-value">7</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Medications Database Section -->
+        <section id="medications">
+          <h1>Medication Database</h1>
+          <div class="search-container">
+            <input
+              type="text"
+              id="medication-search"
+              placeholder="Search medications by name, class, or use..."
+              class="search-input"
+            />
+          </div>
+
+          <div class="medication-list">
+            <!-- Medication search results will be displayed here -->
+            <p>Enter a search term to find medications</p>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Modals -->
+    <!-- View Patient Modal -->
+    <div class="modal" id="view-patient-modal">
+      <div class="modal-content large-modal">
+        <span class="close view-patient-modal-close">&times;</span>
+        <h2>Patient Information</h2>
+
+        <div class="patient-view-container">
+          <div class="patient-view-header">
+            <div class="patient-basic-info">
+              <h3>Basic Information</h3>
+              <p>
+                <strong>Patient ID:</strong>
+                <span id="view-patient-id">P-10001</span>
+              </p>
+              <p>
+                <strong>Name:</strong>
+                <span id="view-patient-name">John Smith</span>
+              </p>
+              <p>
+                <strong>Date of Birth:</strong>
+                <span id="view-patient-dob">05/12/1980</span>
+              </p>
+              <p>
+                <strong>Gender:</strong>
+                <span id="view-patient-gender">Male</span>
+              </p>
+            </div>
+
+            <div class="patient-contact-info">
+              <h3>Contact Information</h3>
+              <p>
+                <strong>Phone:</strong>
+                <span id="view-patient-phone">555-123-4567</span>
+              </p>
+              <p>
+                <strong>Email:</strong>
+                <span id="view-patient-email">john.smith@email.com</span>
+              </p>
+              <p>
+                <strong>Address:</strong>
+                <span id="view-patient-address">123 Main St, Anytown</span>
+              </p>
+            </div>
+
+            <div class="patient-medical-info">
+              <h3>Medical Information</h3>
+              <p>
+                <strong>Insurance:</strong>
+                <span id="view-patient-insurance">HealthPlus</span>
+              </p>
+              <p>
+                <strong>Medical Conditions:</strong>
+                <span id="view-patient-conditions"
+                  >Hypertension, Type 2 Diabetes</span
+                >
+              </p>
+              <p>
+                <strong>Allergies:</strong>
+                <span id="view-patient-allergies">Penicillin, Peanuts</span>
+              </p>
+              <p>
+                <strong>Current Medications:</strong>
+                <span id="view-patient-medications"
+                  >Lisinopril 10mg daily, Metformin 500mg twice daily</span
+                >
+              </p>
+              <p>
+                <strong>Provider Notes:</strong>
+                <span id="view-patient-notes"
+                  >Patient managing conditions well with current
+                  medications.</span
+                >
+              </p>
+            </div>
+          </div>
+
+          <div class="patient-view-tabs">
+            <button class="tab-btn active" data-tab="prescriptions">
+              Prescriptions
+            </button>
+            <button class="tab-btn" data-tab="visits">Visit History</button>
+            <button class="tab-btn" data-tab="lab-results">Lab Results</button>
+          </div>
+
+          <div class="tab-content active" id="prescriptions-tab">
+            <h3>Prescription History</h3>
+            <button id="new-patient-rx-btn" class="primary-btn">
+              New Prescription
+            </button>
+            <table class="patient-prescriptions-table">
+              <thead>
+                <tr>
+                  <th>Medication</th>
+                  <th>Dosage</th>
+                  <th>Frequency</th>
+                  <th>Start Date</th>
+                  <th>End Date</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Prescriptions will be populated by JavaScript -->
+              </tbody>
+            </table>
+          </div>
+
+          <div class="tab-content" id="visits-tab">
+            <h3>Visit History</h3>
+            <div class="visit-history">
+              <div class="visit-entry">
+                <p class="visit-date">11/06/2023</p>
+                <p class="visit-reason">Annual checkup</p>
+                <p class="visit-notes">
+                  Patient reports feeling well. BP 120/80, weight 180 lbs.
+                </p>
+              </div>
+              <div class="visit-entry">
+                <p class="visit-date">09/15/2023</p>
+                <p class="visit-reason">Prescription renewal</p>
+                <p class="visit-notes">
+                  Renewed Lisinopril and Metformin for 6 months.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-content" id="lab-results-tab">
+            <h3>Lab Results</h3>
+            <div class="lab-results">
+              <div class="lab-result">
+                <p class="lab-date">10/20/2023</p>
+                <p class="lab-type">Comprehensive Metabolic Panel</p>
+                <button class="action-btn">View Results</button>
+              </div>
+              <div class="lab-result">
+                <p class="lab-date">10/20/2023</p>
+                <p class="lab-type">Lipid Panel</p>
+                <button class="action-btn">View Results</button>
+              </div>
+              <div class="lab-result">
+                <p class="lab-date">10/20/2023</p>
+                <p class="lab-type">Hemoglobin A1C</p>
+                <button class="action-btn">View Results</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- New Prescription Modal -->
+    <div class="modal" id="new-prescription-modal">
+      <div class="modal-content large-modal">
+        <span class="close new-prescription-modal-close">&times;</span>
+        <h2>New Prescription</h2>
+
+        <div class="patient-rx-info">
+          <p>
+            <strong>Patient:</strong>
+            <span id="rx-patient-name">John Smith</span>
+          </p>
+          <p>
+            <strong>Patient ID:</strong> <span id="rx-patient-id">P-10001</span>
+          </p>
+          <p>
+            <strong>Allergies:</strong>
+            <span id="rx-patient-allergies">Penicillin, Peanuts</span>
+          </p>
+          <p>
+            <strong>Medical Conditions:</strong>
+            <span id="rx-patient-conditions"
+              >Hypertension, Type 2 Diabetes</span
+            >
+          </p>
+          <p>
+            <strong>Current Medications:</strong>
+            <span id="rx-current-medications"
+              >Lisinopril 10mg daily, Metformin 500mg twice daily</span
+            >
+          </p>
+        </div>
+
+        <hr />
+
+        <form id="prescription-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="rx-medication">Medication</label>
+              <input
+                type="text"
+                id="rx-medication"
+                placeholder="Search for medication..."
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="medication-search-modal"
+                >Search Medication Database</label
+              >
+              <div class="medication-search-wrapper">
+                <input
+                  type="text"
+                  id="medication-search-modal"
+                  class="medication-search"
+                  placeholder="Search medications..."
+                />
+                <div class="medication-search-results">
+                  <!-- Search results will be populated here -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="medication-search-results">
+            <!-- Search results will appear here -->
+          </div>
+
+          <div id="rx-medication-details">
+            <!-- Medication details will be populated here -->
+          </div>
+
+          <div id="rx-interaction-warnings">
+            <!-- Interaction warnings will be displayed here -->
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="rx-dosage">Dosage</label>
+              <input type="text" id="rx-dosage" required />
+            </div>
+            <div class="form-group">
+              <label for="rx-frequency">Frequency</label>
+              <select id="rx-frequency" required>
+                <option value="">Select Frequency</option>
+                <option value="Once daily">Once daily</option>
+                <option value="Twice daily">Twice daily</option>
+                <option value="Three times daily">Three times daily</option>
+                <option value="Four times daily">Four times daily</option>
+                <option value="Every morning">Every morning</option>
+                <option value="Every evening">Every evening</option>
+                <option value="Every other day">Every other day</option>
+                <option value="Weekly">Weekly</option>
+                <option value="As needed">As needed</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="rx-duration">Duration (days)</label>
+              <input
+                type="number"
+                id="rx-duration"
+                min="1"
+                max="365"
+                value="30"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="rx-instructions">Instructions for Patient</label>
+            <textarea id="rx-instructions" rows="3" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="rx-notes"
+              >Prescriber Notes (not printed on prescription)</label
+            >
+            <textarea id="rx-notes" rows="2"></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="secondary-btn">Cancel</button>
+            <button type="submit" class="primary-btn">Save Prescription</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Visit Modal (for patient sessions) -->
+    <div class="modal" id="visit-modal">
+      <div class="modal-content large-modal">
+        <span class="close visit-modal-close">&times;</span>
+        <h2>Patient Visit</h2>
+
+        <div class="patient-visit-info">
+          <p>
+            <strong>Patient:</strong>
+            <span id="visit-patient-name">John Smith</span>
+          </p>
+          <p>
+            <strong>Reason for Visit:</strong>
+            <span id="visit-reason">Annual checkup</span>
+          </p>
+          <p>
+            <strong>Appointment Time:</strong>
+            <span id="visit-appointment-time">9:00 AM</span>
+          </p>
+          <p>
+            <strong>Appointment Notes:</strong>
+            <span id="visit-appointment-notes"
+              >Patient's first annual checkup since registering with the
+              clinic.</span
+            >
+          </p>
+        </div>
+
+        <div class="patient-medical-summary">
+          <h3>Medical Summary</h3>
+          <p>
+            <strong>Medical Conditions:</strong>
+            <span id="visit-medical-conditions"
+              >Hypertension, Type 2 Diabetes</span
+            >
+          </p>
+          <p>
+            <strong>Allergies:</strong>
+            <span id="visit-allergies">Penicillin, Peanuts</span>
+          </p>
+          <p>
+            <strong>Current Medications:</strong>
+            <span id="visit-medications"
+              >Lisinopril 10mg daily, Metformin 500mg twice daily</span
+            >
+          </p>
+        </div>
+
+        <form id="visit-form">
+          <div class="form-group">
+            <label for="visit-notes">Visit Notes</label>
+            <textarea id="visit-notes" rows="4" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="visit-diagnosis">Diagnosis</label>
+            <textarea id="visit-diagnosis" rows="2" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="visit-treatment">Treatment Plan</label>
+            <textarea id="visit-treatment" rows="3" required></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="secondary-btn" id="order-labs-btn">
+              Order Labs
+            </button>
+            <button type="button" class="secondary-btn" id="order-imaging-btn">
+              Order Imaging
+            </button>
+            <button type="button" class="secondary-btn" id="new-rx-btn">
+              New Prescription
+            </button>
+            <button type="submit" class="primary-btn">Complete Visit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Medication Details Modal -->
+    <div class="modal" id="medication-details-modal">
+      <div class="modal-content">
+        <span class="close medication-details-modal-close">&times;</span>
+        <h2>Medication Details</h2>
+
+        <div class="medication-details">
+          <h3 id="med-name">Lisinopril</h3>
+          <p>
+            <strong>Class:</strong> <span id="med-class">ACE Inhibitor</span>
+          </p>
+          <p>
+            <strong>Used for:</strong>
+            <span id="med-used-for">Hypertension, Heart Failure</span>
+          </p>
+          <p>
+            <strong>Side Effects:</strong>
+            <span id="med-side-effects">Dry cough, Dizziness, Headache</span>
+          </p>
+
+          <h4>Interactions</h4>
+          <ul id="med-interactions">
+            <!-- Interactions will be populated by JavaScript -->
+          </ul>
+
+          <h4>Contraindications</h4>
+          <ul id="med-contraindications">
+            <!-- Contraindications will be populated by JavaScript -->
+          </ul>
+
+          <h4>Nurse's Notes</h4>
+          <p id="med-nurses-notes">Monitor blood pressure and renal function</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Order Labs Modal -->
+    <div class="modal" id="order-labs-modal">
+      <div class="modal-content">
+        <span class="close order-labs-modal-close">&times;</span>
+        <h2>Order Laboratory Tests</h2>
+
+        <div class="patient-info-summary">
+          <p><strong>Patient:</strong> <span id="labs-patient-name"></span></p>
+          <p><strong>Patient ID:</strong> <span id="labs-patient-id"></span></p>
+        </div>
+
+        <form id="order-labs-form">
+          <div class="form-group">
+            <label>Select Tests:</label>
+            <div class="lab-tests-selection">
+              <div class="lab-test-option">
+                <input
+                  type="checkbox"
+                  id="test-cbc"
+                  name="lab_tests"
+                  value="CBC"
+                />
+                <label for="test-cbc">Complete Blood Count (CBC)</label>
+              </div>
+              <div class="lab-test-option">
+                <input
+                  type="checkbox"
+                  id="test-cmp"
+                  name="lab_tests"
+                  value="CMP"
+                />
+                <label for="test-cmp"
+                  >Comprehensive Metabolic Panel (CMP)</label
+                >
+              </div>
+              <div class="lab-test-option">
+                <input
+                  type="checkbox"
+                  id="test-lipid"
+                  name="lab_tests"
+                  value="Lipid Panel"
+                />
+                <label for="test-lipid">Lipid Panel</label>
+              </div>
+              <div class="lab-test-option">
+                <input
+                  type="checkbox"
+                  id="test-hba1c"
+                  name="lab_tests"
+                  value="HbA1c"
+                />
+                <label for="test-hba1c">Hemoglobin A1C</label>
+              </div>
+              <div class="lab-test-option">
+                <input
+                  type="checkbox"
+                  id="test-thyroid"
+                  name="lab_tests"
+                  value="Thyroid Panel"
+                />
+                <label for="test-thyroid">Thyroid Panel</label>
+              </div>
+              <div class="lab-test-option">
+                <input
+                  type="checkbox"
+                  id="test-urinalysis"
+                  name="lab_tests"
+                  value="Urinalysis"
+                />
+                <label for="test-urinalysis">Urinalysis</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="labs-notes">Additional Notes:</label>
+            <textarea id="labs-notes" rows="2"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="labs-urgency">Urgency:</label>
+            <select id="labs-urgency">
+              <option value="routine">Routine</option>
+              <option value="urgent">Urgent</option>
+              <option value="stat">STAT</option>
+            </select>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="secondary-btn cancel-labs-btn">
+              Cancel
+            </button>
+            <button type="submit" class="primary-btn">Submit Order</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Order Imaging Modal -->
+    <div class="modal" id="order-imaging-modal">
+      <div class="modal-content">
+        <span class="close order-imaging-modal-close">&times;</span>
+        <h2>Order Imaging</h2>
+
+        <div class="patient-info-summary">
+          <p>
+            <strong>Patient:</strong> <span id="imaging-patient-name"></span>
+          </p>
+          <p>
+            <strong>Patient ID:</strong> <span id="imaging-patient-id"></span>
+          </p>
+        </div>
+
+        <form id="order-imaging-form">
+          <div class="form-group">
+            <label>Select Imaging Type:</label>
+            <div class="imaging-selection">
+              <div class="imaging-option">
+                <input
+                  type="radio"
+                  id="imaging-xray"
+                  name="imaging_type"
+                  value="X-Ray"
+                />
+                <label for="imaging-xray">X-Ray</label>
+              </div>
+              <div class="imaging-option">
+                <input
+                  type="radio"
+                  id="imaging-ct"
+                  name="imaging_type"
+                  value="CT Scan"
+                />
+                <label for="imaging-ct">CT Scan</label>
+              </div>
+              <div class="imaging-option">
+                <input
+                  type="radio"
+                  id="imaging-mri"
+                  name="imaging_type"
+                  value="MRI"
+                />
+                <label for="imaging-mri">MRI</label>
+              </div>
+              <div class="imaging-option">
+                <input
+                  type="radio"
+                  id="imaging-ultrasound"
+                  name="imaging_type"
+                  value="Ultrasound"
+                />
+                <label for="imaging-ultrasound">Ultrasound</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="imaging-area">Body Area:</label>
+            <select id="imaging-area">
+              <option value="">Select Body Area</option>
+              <option value="Head">Head</option>
+              <option value="Neck">Neck</option>
+              <option value="Chest">Chest</option>
+              <option value="Abdomen">Abdomen</option>
+              <option value="Pelvis">Pelvis</option>
+              <option value="Spine">Spine</option>
+              <option value="Upper Extremity">Upper Extremity</option>
+              <option value="Lower Extremity">Lower Extremity</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="imaging-reason">Reason for Exam:</label>
+            <textarea id="imaging-reason" rows="2" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="imaging-notes">Additional Instructions:</label>
+            <textarea id="imaging-notes" rows="2"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="imaging-urgency">Urgency:</label>
+            <select id="imaging-urgency">
+              <option value="routine">Routine</option>
+              <option value="urgent">Urgent</option>
+              <option value="stat">STAT</option>
+            </select>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="secondary-btn cancel-imaging-btn">
+              Cancel
+            </button>
+            <button type="submit" class="primary-btn">Submit Order</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

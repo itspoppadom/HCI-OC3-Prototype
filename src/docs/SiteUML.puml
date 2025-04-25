@@ -1,0 +1,150 @@
+@startuml Healthcare Portal Structure Pyramid
+
+' Define colors
+!define PRIMARY_COLOR #0077B6
+!define SECONDARY_COLOR #00A8E8
+!define PUBLIC_COLOR #D1ECF1
+!define DASHBOARD_COLOR #E1F5FE
+!define SECTION_COLOR #F8F9FA
+!define COMPONENT_COLOR #D4EDDA
+!define JS_COLOR #F8D7DA
+!define CSS_COLOR #FFF3CD
+
+' Set styles
+skinparam {
+  BackgroundColor white
+  ArrowColor PRIMARY_COLOR
+  BorderColor PRIMARY_COLOR
+  FontColor black
+  FontSize 14
+  Shadowing false
+  ComponentStyle uml2
+}
+
+' Use strict hierarchical layout for better pyramid structure
+skinparam linetype ortho
+skinparam ranksep 60
+skinparam nodesep 40
+
+' Main Application
+node "Healthcare Portal" as Portal #SECONDARY_COLOR {
+
+  ' Top Level - Public Pages
+  node "Public Pages" as PublicPages #PUBLIC_COLOR {
+    component "index.html" as index
+    component "about.html" as about
+    component "contact.html" as contact
+  }
+  
+  ' Authentication Layer
+  component "Login Modal" as loginModal #COMPONENT_COLOR
+  
+  ' Middle Level - Role Dashboards
+  node "Role-specific Dashboards" as Dashboards #DASHBOARD_COLOR {
+    component "receptionist-dashboard.html" as receptionistDash
+    component "healthcare-provider-dashboard.html" as providerDash
+    component "claims-examiner-dashboard.html" as examinerDash
+    component "admin-dashboard.html" as adminDash
+  }
+  
+  ' Lower Level - Dashboard Sections
+  node "Receptionist Sections" as RecSections #SECTION_COLOR {
+    component "Dashboard Overview" as recDashboard
+    component "Appointments" as recAppointments
+    component "Patient Management" as recPatients
+    component "Doctor Schedules" as recDoctors
+    component "Patient Check-In" as recCheckIn
+  }
+  
+  node "Healthcare Provider Sections" as ProvSections #SECTION_COLOR {
+    component "Dashboard Overview" as provDashboard
+    component "My Patients" as provPatients
+    component "Appointments" as provAppointments
+    component "Prescriptions" as provPrescriptions
+    component "Medication Database" as provMedications
+  }
+  
+  node "Claims Examiner Sections" as ExamSections #SECTION_COLOR {
+    component "Dashboard Overview" as examDashboard
+    component "Pending Claims" as examPending
+    component "Approved Claims" as examApproved
+    component "Rejected Claims" as examRejected
+    component "Reports" as examReports
+  }
+  
+  node "Admin Sections" as AdminSections #SECTION_COLOR {
+    component "Dashboard Overview" as adminDashboard
+    component "User Management" as adminUsers
+    component "Role Assignment" as adminRoles
+    component "Password Reset" as adminPasswords
+    component "System Settings" as adminSystem
+  }
+  
+  ' Bottom Level - Resources
+  node "Resources" as Resources {
+    ' Shared Components
+    node "Shared Components" as Shared #COMPONENT_COLOR {
+      component "Notification System" as notificationSystem
+      component "Navigation" as nav
+    }
+    
+    ' JavaScript Files
+    node "JavaScript Files" as JS #JS_COLOR {
+      component "script.js" as scriptJs
+      component "dashboard.js" as dashboardJs
+      component "receptionist.js" as receptionistJs
+      component "healthcare-provider.js" as providerJs
+      component "claims-examiner.js" as examinerJs
+      component "admin.js" as adminJs
+    }
+    
+    ' CSS Files
+    node "CSS Files" as CSS #CSS_COLOR {
+      component "styles.css" as stylesCss
+      component "dashboard.css" as dashboardCss
+      component "healthcare-provider.css" as providerCss
+      component "claims-examiner.css" as examinerCss
+    }
+  }
+}
+
+' Relationships - Hierarchical Structure (top to bottom)
+' Level 1 to 2: Public Pages to Login
+index --> loginModal
+PublicPages -[hidden]-> loginModal
+
+' Level 2 to 3: Login to Dashboards
+loginModal --> Dashboards
+
+' Level 3 to 4: Dashboards to their Sections
+receptionistDash --> RecSections
+providerDash --> ProvSections
+examinerDash --> ExamSections
+adminDash --> AdminSections
+
+' Level 4 to 5: Sections to Resources
+RecSections -[hidden]-> Resources
+ProvSections -[hidden]-> Resources
+ExamSections -[hidden]-> Resources
+AdminSections -[hidden]-> Resources
+
+' Functional relationships
+scriptJs --> loginModal : handles
+dashboardJs --> Dashboards : functionality
+receptionistJs --> RecSections : functionality
+providerJs --> ProvSections : functionality
+examinerJs --> ExamSections : functionality
+adminJs --> AdminSections : functionality
+
+stylesCss --> PublicPages : styles
+dashboardCss --> Dashboards : styles
+providerCss --> providerDash : styles
+examinerCss --> examinerDash : styles
+
+Dashboards .> Shared : uses
+RecSections .> notificationSystem : uses
+ProvSections .> notificationSystem : uses
+ExamSections .> notificationSystem : uses
+AdminSections .> notificationSystem : uses
+
+@enduml
