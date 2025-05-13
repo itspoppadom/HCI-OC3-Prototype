@@ -518,3 +518,35 @@ button:active {
     flex: 1;
   }
 }
+
+/* Forgot Password Modal Styles */
+.admin-contact {
+  background-color: #f8f9fa;
+  border-left: 4px solid #0077b6;
+  padding: 15px;
+  margin: 15px 0;
+  border-radius: 4px;
+}
+
+.forgot-note {
+  color: #6c757d;
+  font-style: italic;
+  margin-bottom: 20px;
+}
+
+.close-forgot-modal {
+  display: block;
+  margin: 0 auto;
+  background-color: #0077b6;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.close-forgot-modal:hover {
+  background-color: #005b8a;
+}

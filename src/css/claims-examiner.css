@@ -274,6 +274,64 @@
   margin-top: 20px;
 }
 
+/* Request Information Modal Styles */
+.claim-info-summary {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  border-left: 4px solid #0077b6;
+}
+
+.document-selection {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.document-option {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.document-option input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+.document-option label {
+  cursor: pointer;
+}
+
+/* Confirmation Modal Styles */
+.confirmation-content {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.confirmation-icon {
+  font-size: 48px;
+  color: #28a745;
+  margin-bottom: 20px;
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+  line-height: 80px;
+  border-radius: 50%;
+  background-color: #d4edda;
+}
+
+.close-confirmation-btn {
+  margin-top: 20px;
+}
+
+/* Fix for the modal z-index so it appears on top */
+#request-info-modal, 
+#request-confirmation-modal {
+  z-index: 1010;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .claim-header,

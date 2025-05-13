@@ -850,5 +850,72 @@
         </form>
       </div>
     </div>
+
+    <!-- Lab Results Modal -->
+    <div class="modal" id="lab-results-modal">
+      <div class="modal-content large-modal">
+        <span class="close lab-results-modal-close">&times;</span>
+        <h2>Lab Results</h2>
+
+        <div class="lab-result-header">
+          <div>
+            <p>
+              <strong>Patient:</strong>
+              <span id="lab-result-patient-name">John Smith</span>
+            </p>
+            <p>
+              <strong>Patient ID:</strong>
+              <span id="lab-result-patient-id">P-10001</span>
+            </p>
+          </div>
+          <div>
+            <p>
+              <strong>Test Date:</strong>
+              <span id="lab-result-date">10/20/2023</span>
+            </p>
+            <p>
+              <strong>Test Type:</strong>
+              <span id="lab-result-type">Comprehensive Metabolic Panel</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="lab-result-content">
+          <table class="lab-results-table">
+            <thead>
+              <tr>
+                <th>Test</th>
+                <th>Result</th>
+                <th>Reference Range</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="lab-results-table-body">
+              <!-- Lab results will be populated by JavaScript -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="lab-result-notes">
+          <h3>Provider Notes</h3>
+          <p id="lab-result-notes">
+            Results are within normal ranges. No further action required.
+          </p>
+        </div>
+
+        <div class="form-actions">
+          <button
+            type="button"
+            class="secondary-btn"
+            id="print-lab-results-btn"
+          >
+            Print Results
+          </button>
+          <button type="button" class="primary-btn close-lab-results-btn">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

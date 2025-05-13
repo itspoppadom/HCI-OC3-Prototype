@@ -622,6 +622,158 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  // Handle request information button
+  const requestInfoBtn = document.getElementById("request-info-btn");
+  if (requestInfoBtn) {
+    requestInfoBtn.addEventListener("click", function () {
+      // Get the current claim data from the review modal
+      const claimId = document.getElementById("claim-id").textContent;
+      const patientName = document.getElementById("claim-patient").textContent;
+      const providerName =
+        document.getElementById("claim-provider").textContent;
+      const serviceDate =
+        document.getElementById("claim-service-date").textContent;
+
+      // Find the claim in our data
+      const claim = claims.find((c) => c.id === claimId);
+      if (!claim) {
+        showNotification("Claim not found", "error");
+        return;
+      }
+
+      // Close the claim review modal
+      document.getElementById("claim-modal").style.display = "none";
+
+      // Populate the request info modal
+      document.getElementById("request-claim-id").textContent = claimId;
+      document.getElementById("request-patient-name").textContent = patientName;
+      document.getElementById("request-provider-name").textContent =
+        providerName;
+      document.getElementById("request-service-date").textContent = serviceDate;
+
+      // Set a default deadline (14 days from today)
+      const today = new Date();
+      const twoWeeksLater = new Date(today.setDate(today.getDate() + 14));
+      document.getElementById("request-deadline").valueAsDate = twoWeeksLater;
+
+      // Show the request info modal
+      document.getElementById("request-info-modal").style.display = "flex";
+    });
+  }
+
+  // Handle request info form submission
+  const requestInfoForm = document.getElementById("request-info-form");
+  if (requestInfoForm) {
+    requestInfoForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      // Get the selected documents
+      const selectedDocs = [];
+      document
+        .querySelectorAll('input[name="requested_docs"]:checked')
+        .forEach((checkbox) => {
+          selectedDocs.push(checkbox.value);
+        });
+
+      // Validate form inputs
+      if (selectedDocs.length === 0) {
+        showNotification("Please select at least one document", "error");
+        return;
+      }
+
+      const deadline = document.getElementById("request-deadline").value;
+      if (!deadline) {
+        showNotification("Please select a deadline", "error");
+        return;
+      }
+
+      // Get the claim ID from the request modal
+      const claimId = document.getElementById("request-claim-id").textContent;
+      const notes = document.getElementById("request-info-notes").value;
+
+      // Update the claim in our data
+      const claimIndex = claims.findIndex((c) => c.id === claimId);
+      if (claimIndex !== -1) {
+        // Update the claim status
+        claims[claimIndex].status = "Documentation Required";
+
+        // Add notes about the request
+        const documentsRequested = selectedDocs.join(", ");
+        const additionalNote = notes ? `\nDetails: ${notes}` : "";
+        const noteEntry = `\nExaminer requested additional documents: ${documentsRequested}. Required by: ${formatDate(
+          deadline
+        )}.${additionalNote}`;
+
+        claims[claimIndex].notes += noteEntry;
+
+        // Hide the request info modal
+        document.getElementById("request-info-modal").style.display = "none";
+
+        // Show the confirmation modal
+        document.getElementById("request-confirmation-modal").style.display =
+          "flex";
+
+        // Update the dashboard
+        renderClaimsQueue();
+        renderClaimsByStatus();
+        updateDashboardStats();
+      }
+    });
+  }
+
+  // Close buttons for the request info modal
+  const requestInfoModalClose = document.querySelector(
+    ".request-info-modal-close"
+  );
+  if (requestInfoModalClose) {
+    requestInfoModalClose.addEventListener("click", function () {
+      document.getElementById("request-info-modal").style.display = "none";
+    });
+  }
+
+  const cancelRequestBtn = document.querySelector(".cancel-request-btn");
+  if (cancelRequestBtn) {
+    cancelRequestBtn.addEventListener("click", function () {
+      document.getElementById("request-info-modal").style.display = "none";
+    });
+  }
+
+  // Close button for the confirmation modal
+  const requestConfirmationModalClose = document.querySelector(
+    ".request-confirmation-modal-close"
+  );
+  if (requestConfirmationModalClose) {
+    requestConfirmationModalClose.addEventListener("click", function () {
+      document.getElementById("request-confirmation-modal").style.display =
+        "none";
+    });
+  }
+
+  const closeConfirmationBtn = document.querySelector(
+    ".close-confirmation-btn"
+  );
+  if (closeConfirmationBtn) {
+    closeConfirmationBtn.addEventListener("click", function () {
+      document.getElementById("request-confirmation-modal").style.display =
+        "none";
+    });
+  }
+
+  // Close modals when clicking outside
+  window.addEventListener("click", function (e) {
+    const requestInfoModal = document.getElementById("request-info-modal");
+    if (e.target === requestInfoModal) {
+      requestInfoModal.style.display = "none";
+    }
+
+    const requestConfirmationModal = document.getElementById(
+      "request-confirmation-modal"
+    );
+    if (e.target === requestConfirmationModal) {
+      requestConfirmationModal.style.display = "none";
+    }
+  });
+
   // Handle grid/list view toggle
   if (gridViewBtn && listViewBtn) {
     gridViewBtn.addEventListener("click", function () {

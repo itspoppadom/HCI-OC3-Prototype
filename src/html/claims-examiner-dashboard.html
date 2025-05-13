@@ -368,6 +368,87 @@
       </div>
     </div>
 
+    <!-- Add this modal right after the existing claim-modal -->
+    <!-- Request Information Modal -->
+    <div class="modal" id="request-info-modal">
+      <div class="modal-content">
+        <span class="close request-info-modal-close">&times;</span>
+        <h2>Request Additional Information</h2>
+        
+        <div class="claim-info-summary">
+          <p><strong>Claim ID:</strong> <span id="request-claim-id"></span></p>
+          <p><strong>Patient:</strong> <span id="request-patient-name"></span></p>
+          <p><strong>Provider:</strong> <span id="request-provider-name"></span></p>
+          <p><strong>Service Date:</strong> <span id="request-service-date"></span></p>
+        </div>
+        
+        <form id="request-info-form">
+          <div class="form-group">
+            <label>Select Required Documents:</label>
+            <div class="document-selection">
+              <div class="document-option">
+                <input type="checkbox" id="doc-medical-records" name="requested_docs" value="Medical Records">
+                <label for="doc-medical-records">Complete Medical Records</label>
+              </div>
+              <div class="document-option">
+                <input type="checkbox" id="doc-itemized-bill" name="requested_docs" value="Itemized Bill">
+                <label for="doc-itemized-bill">Itemized Bill</label>
+              </div>
+              <div class="document-option">
+                <input type="checkbox" id="doc-doctors-notes" name="requested_docs" value="Doctor's Notes">
+                <label for="doc-doctors-notes">Doctor's Notes</label>
+              </div>
+              <div class="document-option">
+                <input type="checkbox" id="doc-lab-results" name="requested_docs" value="Lab Results">
+                <label for="doc-lab-results">Lab Results</label>
+              </div>
+              <div class="document-option">
+                <input type="checkbox" id="doc-imaging-results" name="requested_docs" value="Imaging Results">
+                <label for="doc-imaging-results">Imaging Results</label>
+              </div>
+              <div class="document-option">
+                <input type="checkbox" id="doc-referral" name="requested_docs" value="Referral">
+                <label for="doc-referral">Referral Documentation</label>
+              </div>
+              <div class="document-option">
+                <input type="checkbox" id="doc-insurance-info" name="requested_docs" value="Insurance Information">
+                <label for="doc-insurance-info">Updated Insurance Information</label>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="request-info-notes">Additional Notes:</label>
+            <textarea id="request-info-notes" rows="3" placeholder="Provide specific details about the documents needed..."></textarea>
+          </div>
+          
+          <div class="form-group">
+            <label for="request-deadline">Required By:</label>
+            <input type="date" id="request-deadline" required>
+          </div>
+          
+          <div class="form-actions">
+            <button type="button" class="secondary-btn cancel-request-btn">Cancel</button>
+            <button type="submit" class="primary-btn">Send Request</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Add a confirmation modal for when the request is sent -->
+    <div class="modal" id="request-confirmation-modal">
+      <div class="modal-content">
+        <span class="close request-confirmation-modal-close">&times;</span>
+        <div class="confirmation-content">
+          <div class="confirmation-icon">✓</div>
+          <h2>Request Sent Successfully</h2>
+          <p>Your request for additional information has been sent.</p>
+          <p>The claim status has been updated to <strong>Documentation Required</strong>.</p>
+          <button class="primary-btn close-confirmation-btn">OK</button>
+        </div>
+      </div>
+    </div>
+
     <footer>
       <p>Email:30087241@nescol.ac.uk | Phone: 01224 612330</p>
     </footer>

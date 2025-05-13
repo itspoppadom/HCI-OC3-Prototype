@@ -1808,4 +1808,190 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   });
+
+  // Sample lab results data
+  const labResultsData = {
+    "Comprehensive Metabolic Panel": [
+      {
+        test: "Glucose",
+        result: "95 mg/dL",
+        range: "70-99 mg/dL",
+        status: "normal",
+      },
+      {
+        test: "Creatinine",
+        result: "0.9 mg/dL",
+        range: "0.6-1.2 mg/dL",
+        status: "normal",
+      },
+      {
+        test: "Sodium",
+        result: "140 mEq/L",
+        range: "135-145 mEq/L",
+        status: "normal",
+      },
+      {
+        test: "Potassium",
+        result: "4.0 mEq/L",
+        range: "3.5-5.0 mEq/L",
+        status: "normal",
+      },
+      {
+        test: "Chloride",
+        result: "102 mEq/L",
+        range: "98-107 mEq/L",
+        status: "normal",
+      },
+      {
+        test: "CO2",
+        result: "24 mEq/L",
+        range: "20-29 mEq/L",
+        status: "normal",
+      },
+      {
+        test: "BUN",
+        result: "15 mg/dL",
+        range: "7-20 mg/dL",
+        status: "normal",
+      },
+      {
+        test: "Calcium",
+        result: "9.5 mg/dL",
+        range: "8.5-10.2 mg/dL",
+        status: "normal",
+      },
+    ],
+    "Lipid Panel": [
+      {
+        test: "Total Cholesterol",
+        result: "210 mg/dL",
+        range: "<200 mg/dL",
+        status: "abnormal",
+      },
+      {
+        test: "LDL Cholesterol",
+        result: "130 mg/dL",
+        range: "<100 mg/dL",
+        status: "abnormal",
+      },
+      {
+        test: "HDL Cholesterol",
+        result: "45 mg/dL",
+        range: ">40 mg/dL",
+        status: "normal",
+      },
+      {
+        test: "Triglycerides",
+        result: "150 mg/dL",
+        range: "<150 mg/dL",
+        status: "borderline",
+      },
+    ],
+    "Hemoglobin A1C": [
+      { test: "HbA1c", result: "6.4%", range: "<5.7%", status: "abnormal" },
+    ],
+  };
+
+  // Handle view lab results button clicks
+  function setupLabResultButtons() {
+    const labResultsModal = document.getElementById("lab-results-modal");
+    const labResultsModalClose = document.querySelector(
+      ".lab-results-modal-close"
+    );
+    const closeLabResultsBtn = document.querySelector(".close-lab-results-btn");
+    const printLabResultsBtn = document.getElementById("print-lab-results-btn");
+
+    // Close modal handlers
+    if (labResultsModalClose) {
+      labResultsModalClose.addEventListener("click", function () {
+        labResultsModal.style.display = "none";
+      });
+    }
+
+    if (closeLabResultsBtn) {
+      closeLabResultsBtn.addEventListener("click", function () {
+        labResultsModal.style.display = "none";
+      });
+    }
+
+    // Print button handler
+    if (printLabResultsBtn) {
+      printLabResultsBtn.addEventListener("click", function () {
+        window.print();
+      });
+    }
+
+    // Add lab results modal to the window click handler
+    window.addEventListener("click", function (e) {
+      if (e.target === labResultsModal) {
+        labResultsModal.style.display = "none";
+      }
+    });
+
+    // Add click handlers to all view results buttons
+    document.querySelectorAll(".lab-result .action-btn").forEach((btn) => {
+      btn.addEventListener("click", function () {
+        const labType =
+          this.closest(".lab-result").querySelector(".lab-type").textContent;
+        const labDate =
+          this.closest(".lab-result").querySelector(".lab-date").textContent;
+
+        // Find the current patient being viewed
+        const patient = patients.find((p) => p.id === currentPatientId);
+
+        if (patient && labResultsModal) {
+          // Populate the modal with the lab results data
+          document.getElementById(
+            "lab-result-patient-name"
+          ).textContent = `${patient.firstName} ${patient.lastName}`;
+          document.getElementById("lab-result-patient-id").textContent =
+            patient.id;
+          document.getElementById("lab-result-date").textContent = labDate;
+          document.getElementById("lab-result-type").textContent = labType;
+
+          // Populate results table
+          const tableBody = document.getElementById("lab-results-table-body");
+          tableBody.innerHTML = "";
+
+          const resultsData = labResultsData[labType] || [];
+          resultsData.forEach((test) => {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+              <td>${test.test}</td>
+              <td>${test.result}</td>
+              <td>${test.range}</td>
+              <td class="test-result-${test.status}">${
+              test.status.charAt(0).toUpperCase() + test.status.slice(1)
+            }</td>
+            `;
+            tableBody.appendChild(tr);
+          });
+
+          // Set notes based on test results
+          let notes =
+            "Results are within normal ranges. No further action required.";
+          if (resultsData.some((test) => test.status === "abnormal")) {
+            notes =
+              "Some results are outside normal ranges. Follow-up recommended.";
+
+            // Specific notes for known issues
+            if (labType === "Lipid Panel") {
+              notes +=
+                " Consider lifestyle modifications and possible statin therapy for elevated cholesterol.";
+            } else if (labType === "Hemoglobin A1C") {
+              notes +=
+                " Patient has prediabetes (HbA1c 6.4%). Recommend lifestyle changes and monitoring.";
+            }
+          }
+          document.getElementById("lab-result-notes").textContent = notes;
+
+          // Show the modal
+          labResultsModal.style.display = "flex";
+        }
+      });
+    });
+  }
+
+  // Call this function to initialize the lab results buttons
+  setupLabResultButtons();
 });

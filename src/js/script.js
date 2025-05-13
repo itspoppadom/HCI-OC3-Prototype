@@ -182,3 +182,54 @@ function updateUI() {
     });
   }
 }
+
+// Handle forgot password links
+const forgotPasswordLinks = document.querySelectorAll('.forgot-password');
+forgotPasswordLinks.forEach(link => {
+  link.addEventListener('click', function(e) {
+    e.preventDefault();
+    
+    // Create the forgot password modal
+    const forgotPasswordModal = document.createElement('div');
+    forgotPasswordModal.className = 'modal';
+    forgotPasswordModal.id = 'forgotPasswordModal';
+    forgotPasswordModal.style.display = 'flex';
+    
+    // Create modal content
+    forgotPasswordModal.innerHTML = `
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Password Reset</h2>
+        <p>Please contact the system administrator to reset your password:</p>
+        <div class="admin-contact">
+          <p><strong>Email:</strong> admin@healthcare.com</p>
+          <p><strong>Phone:</strong> 01224 612330</p>
+        </div>
+        <p class="forgot-note">Please include your username and role in your communication.</p>
+        <button class="primary-btn close-forgot-modal">OK</button>
+      </div>
+    `;
+    
+    // Add to document
+    document.body.appendChild(forgotPasswordModal);
+    
+    // Add event listeners to close the modal
+    const closeButton = forgotPasswordModal.querySelector('.close');
+    const okButton = forgotPasswordModal.querySelector('.close-forgot-modal');
+    
+    closeButton.addEventListener('click', function() {
+      forgotPasswordModal.remove();
+    });
+    
+    okButton.addEventListener('click', function() {
+      forgotPasswordModal.remove();
+    });
+    
+    // Close when clicking outside the modal content
+    forgotPasswordModal.addEventListener('click', function(e) {
+      if (e.target === forgotPasswordModal) {
+        forgotPasswordModal.remove();
+      }
+    });
+  });
+});
